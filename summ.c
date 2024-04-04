@@ -25,8 +25,7 @@ int main()
     int n = upperValue;
 
     for (int i = 0; i <= n; n--) {
-        int sum = 0;
-        sum += summation(n);
+        int sum = summation(n);
         printf("%d\n", n);
         printf("%d\n", sum);
         printf("%x\n", sum);
