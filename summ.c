@@ -21,16 +21,16 @@ int summation (int n)
 
 int main() 
 {
-    int upperValue = 3;
+    int upperValue = 10;
     int n = upperValue;
-    int sum = 0;
 
     for (int i = 0; i <= n; n--) {
+        int sum = 0;
         sum += summation(n);
+        printf("%d\n", n);
+        printf("%d\n", sum);
+        printf("%x\n", sum);
+        printf("\n");
     }
-    n = upperValue;
 
-    printf("\n");
-    printf("%d\n", n);
-    printf("%x\n", sum);
 }
