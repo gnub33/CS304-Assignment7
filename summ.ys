@@ -1,0 +1,63 @@
+#Daniel Knight
+#CS304
+#Assignment 7
+
+
+.pos 0x0
+           irmovl $0,   %ecx     # i = 0
+           irmovl $0,   %ebx     # mult5 = 0 starting at 5(0)-2
+           irmovl $0,   %edx     # offset for arr
+
+initloop:  rrmovl %edx, %esi     # %esi = %edx 
+           irmovl arr,  %eax     # %eax = base of arr
+           addl   %eax, %esi     # %esi = base + offset
+           
+           irmovl $-2,  %eax     #prep for subtraction
+           addl   %ebx, %eax     #\uc0\u65285 eax = mult5 - 2
+           
+           rmmovl %eax, (%esi)   # arr[i] = mult5 - 2
+           
+           irmovl $4,   %eax     # get ready to compute next addr in arr
+           addl   %eax, %edx     # offset increased by 4 bytes
+
+           irmovl $5,   %eax     # get ready to compute next mult of 5
+           addl   %eax, %ebx     # mult5 += 5
+           
+           irmovl $1,   %eax     # get ready to incr i
+           addl   %eax, %ecx     # i++
+
+           irmovl $10,   %edi     # end loop val
+           subl   %ecx, %edi     # %edi = %edi - %ecx / 10-i
+           jg     initloop       # while (i < 10)  //while i>0
+
+           irmovl $0,   %ecx     # i = 0
+           irmovl $0,   %ebx     # sum = 0
+           irmovl $0,   %edx     # offset for arr
+
+summation: rrmovl %edx, %esi     # %esi = %edx
+           irmovl arr,  %eax     # %eax = base of arr
+           addl   %eax, %esi     # %esi = +addr of val
+
+           mrmovl (%esi), %eax   # %eax = arr[i]
+
+           addl   %ebx,  %eax    #add sum to array val
+           rmmovl %eax, (%esi)   # set new val in arr
+           
+           rrmovl   %eax, %ebx     #set new sum val
+           
+           irmovl $4,   %eax     # get ready to compute next addr in arr
+           addl   %eax, %edx     # offset increased by 4 bytes
+           
+           irmovl $1,   %eax     # get ready to incr i
+           addl   %eax, %ecx     # i++
+
+           irmovl $10,   %edi     # %end loop value
+           subl   %ecx, %edi     # %edi = %edi - %ecx / 10-i
+
+           jg     summation       # while (i < 10)  //while i>0
+
+           halt
+
+
+.align 4
+arr:
